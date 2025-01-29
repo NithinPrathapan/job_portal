@@ -1,8 +1,9 @@
 import React from "react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import { Button } from "../ui/button";
 
-const commonform = ({
+const CommonForm = ({
   action,
   formControls,
   buttonText,
@@ -10,12 +11,13 @@ const commonform = ({
   btnType,
   formData,
   setFormData,
-  handleFileChange,
+  
 }) => {
   function handleChange(e, name) {
     setFormData({ ...formData, [name]: e.target.value });
   }
   function renderInputByComponentType(getCurrentControl) {
+    console.log(getCurrentControl, "getCurrentControl");
     let content = null;
     switch (getCurrentControl.componentType) {
       case "input":
@@ -85,4 +87,4 @@ const commonform = ({
   );
 };
 
-export default commonform;
+export default CommonForm;
