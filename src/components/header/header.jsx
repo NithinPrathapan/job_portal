@@ -5,29 +5,53 @@ import { Button } from "../ui/button";
 import { AlignJustify } from "lucide-react";
 import Link from "next/link";
 
-const Header = () => {
+const Header = ({ user }) => {
   const menuItems = [
-   {
-    name: "Home",
-    href: "/",
-    show: true,
-   },
-   {
-    name: "Register",
-    href: "/sign-up",
-    show: true,
-   },
-   {
-    name: "Login",
-    href: "/sign-in",
-    show: true,
-   }
-
+    {
+      name: "Home",
+      href: "/",
+      show: true,
+    },
+    {
+      name: "Register",
+      href: "/sign-up",
+      show: !user,
+    },
+    {
+      name: "Login",
+      href: "/sign-in",
+      show: !user,
+    },
+    {
+      name: "Profile",
+      href: "/profile",
+      show: user,
+    },
+    {
+      name: "Logout",
+      href: "/logout",
+      show: user,
+    },
+    {
+      name: "Account",
+      href: "/account",
+      show: user,
+    },
+    {
+      name: "Membership",
+      href: "/membership",
+      show: user,
+    },
+    {
+      name: "Activity",
+      href: "/activity",
+      show: user,
+    },
   ];
   return (
     <div>
       <header className="shrink-0 flex h-16 items-center justify-between">
-        <Sheet >
+        <Sheet>
           <SheetTrigger asChild>
             <Button className="lg:hidden">
               <AlignJustify className="h-6 w-6" />
@@ -41,34 +65,34 @@ const Header = () => {
                   JobFound
                 </Link>
               </SheetTitle>
-              {menuItems.map(
-                (item) =>
-                  item.show ? (
-                    <Link
-                      className=" font-medium text-xl "
-                      key={item.name}
-                      href={item.href}
-                    >
-                      {item.name}
-                    </Link>
-                  ) : null
+              {menuItems.map((item) =>
+                item.show ? (
+                  <Link
+                    className=" font-medium text-xl "
+                    key={item.name}
+                    href={item.href}
+                  >
+                    {item.name}
+                  </Link>
+                ) : null
               )}
             </div>
           </SheetContent>
         </Sheet>
-        <Link href='/' className=" hidden text-3xl font-bold lg:flex mr-6">JobFound</Link>
+        <Link href="/" className=" hidden text-3xl font-bold lg:flex mr-6">
+          JobFound
+        </Link>
         <nav className="hidden lg:flex gap-6 ml-auto">
-          {menuItems.map(
-            (item) =>
-              item.show ? (
-                <Link
-                  className="group inline-flex items-center gap-1 h-9  w-max px-4 py-2 text-sm font-medium "
-                  key={item.name}
-                  href={item.href}
-                >
-                  {item.name}
-                </Link>     
-              ):null
+          {menuItems.map((item) =>
+            item.show ? (
+              <Link
+                className="group inline-flex items-center gap-1 h-9  w-max px-4 py-2 text-sm font-medium "
+                key={item.name}
+                href={item.href}
+              >
+                {item.name}
+              </Link>
+            ) : null
           )}
         </nav>
       </header>
