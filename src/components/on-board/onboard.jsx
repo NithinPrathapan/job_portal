@@ -7,13 +7,21 @@ import {
   recruiterOnboardFormControls,
 } from "@/utils";
 import { createProfileAction } from "@/actions";
-const OnBoard = () => {
+import { useUser } from "@clerk/nextjs";
+
+
+const OnBoard =  () => {
   const [currentTab, setCurrentTab] = useState("candidate");
   const [recruiterFormData, setRecruiterFormData] = useState(
     initialRecruiterFormData
   );
   const [candidateFormData, setCandidateFormData] = useState({});
-  console.log(currentTab, "currentTab");
+
+  const currentAuthuser = useUser();
+  const { user } = currentAuthuser;
+  console.log('current user',user)
+
+
   const handleTabChange = (value) => {
     setCurrentTab(value);
   };
@@ -45,11 +53,11 @@ const OnBoard = () => {
             recruiterInfo: recruiterFormData,
             role: "recruiter",
             isPremiumUser: false,
-            userId: user._id,
+            userId: user.id,
             email: user?.primaryEmailAddress?.emailAddress,
           };
 
-          await createProfileAction(data,'/onboard')
+    await createProfileAction(data, "/");
   };
 
   return (
@@ -71,12 +79,10 @@ const OnBoard = () => {
           <CommonForm
             formControls={recruiterOnboardFormControls}
             buttonText={"onboard as recruiter"}
-            action={createProfileAction}
+            action={createProfile}
             setFormData={setRecruiterFormData}
             formData={recruiterFormData}
             isButtonDisabled={!validateRecruiterForm()}
-
-
           />
         </TabsContent>
       </Tabs>
