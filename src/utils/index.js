@@ -19,3 +19,8 @@ export const recruiterOnboardFormControls = [
       componentType: "input",
     },
   ];
+  export const initialRecruiterFormData = {
+    name: "",
+    companyName: "",
+    companyRole: "",
+  };

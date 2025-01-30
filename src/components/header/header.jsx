@@ -21,7 +21,7 @@ const Header = ({ user }) => {
       name: "Login",
       href: "/sign-in",
       show: !user,
-    },
+    },  
     {
       name: "Profile",
       href: "/profile",
@@ -29,7 +29,7 @@ const Header = ({ user }) => {
     },
     {
       name: "Logout",
-      href: "/logout",
+      href: "/sign-out",
       show: user,
     },
     {
