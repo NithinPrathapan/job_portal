@@ -19,7 +19,7 @@ const OnBoard =  () => {
 
   const currentAuthuser = useUser();
   const { user } = currentAuthuser;
-  console.log('current user',user)
+  // console.log('current user',user)
 
 
   const handleTabChange = (value) => {

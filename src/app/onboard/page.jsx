@@ -5,9 +5,9 @@ import { redirect } from "next/navigation";
 import { fetchProfileAction } from "@/actions";
 const page = async () => {
   const user = await currentUser();
-  console.log("the user", user.id);
+  // console.log("the user", user.id);
   const profileInfo = await fetchProfileAction(user.id);
-  console.log('this is profile info',profileInfo)
+  // console.log('this is profile info',profileInfo)
 
   if (profileInfo?.userId) {
     if (profileInfo?.role === "recruiter" && !profileInfo.isPremiumUser)
