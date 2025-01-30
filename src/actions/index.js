@@ -3,11 +3,12 @@
 import connectDB from "@/database/index.js"
 
 
-export const createProfileAction = async (formData) => {
+export const createProfileAction = async (formData,path) => {
     try {
         await connectDB()
         await Profile.create(formData)
-        revalidatePath('/')
+        revalidatePath(path)
+        
         return {
             success: true,
             message: "Profile created successfully"

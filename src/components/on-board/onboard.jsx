@@ -6,6 +6,7 @@ import {
   initialRecruiterFormData,
   recruiterOnboardFormControls,
 } from "@/utils";
+import { createProfileAction } from "@/actions";
 const OnBoard = () => {
   const [currentTab, setCurrentTab] = useState("candidate");
   const [recruiterFormData, setRecruiterFormData] = useState(
@@ -28,6 +29,29 @@ const OnBoard = () => {
       recruiterFormData.companyName.trim() !== ""
     );
   };
+
+  // creating profile using the type of the user logged in
+  const createProfile = async () => {
+    const data =
+      currentTab === "candidate"
+        ? {
+            candidateInfo: candidateFormData,
+            role: "candidate",
+            isPremiumUser: false,
+            userId: user._id,
+            email: user?.primaryEmailAddress?.emailAddress,
+          }
+        : {
+            recruiterInfo: recruiterFormData,
+            role: "recruiter",
+            isPremiumUser: false,
+            userId: user._id,
+            email: user?.primaryEmailAddress?.emailAddress,
+          };
+
+          await createProfileAction(data,'/onboard')
+  };
+
   return (
     <div className="bg-white ">
       <Tabs value={currentTab} onValueChange={handleTabChange}>
@@ -47,10 +71,12 @@ const OnBoard = () => {
           <CommonForm
             formControls={recruiterOnboardFormControls}
             buttonText={"onboard as recruiter"}
-            action={handleOnboard}
+            action={createProfileAction}
             setFormData={setRecruiterFormData}
             formData={recruiterFormData}
             isButtonDisabled={!validateRecruiterForm()}
+
+
           />
         </TabsContent>
       </Tabs>
