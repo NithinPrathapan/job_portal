@@ -4,7 +4,6 @@ import React from "react";
 
 const page = async () => {
   const user = await currentUser();
-  console.log(user, "current user");
   const profileInfo = null;
 
   if (user && !profileInfo?._id) redirect("/onboard");

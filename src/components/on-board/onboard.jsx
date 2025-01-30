@@ -2,10 +2,15 @@
 import React, { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import CommonForm from "../common-form/commonform";
-import { initialRecruiterFormData, recruiterOnboardFormControls } from "@/utils";
+import {
+  initialRecruiterFormData,
+  recruiterOnboardFormControls,
+} from "@/utils";
 const OnBoard = () => {
   const [currentTab, setCurrentTab] = useState("candidate");
-  const [recruiterFormData, setRecruiterFormData] = useState(initialRecruiterFormData);
+  const [recruiterFormData, setRecruiterFormData] = useState(
+    initialRecruiterFormData
+  );
   const [candidateFormData, setCandidateFormData] = useState({});
   console.log(currentTab, "currentTab");
   const handleTabChange = (value) => {
@@ -13,6 +18,15 @@ const OnBoard = () => {
   };
   const handleOnboard = async (formData) => {
     console.log(formData, "formData");
+  };
+
+  const validateRecruiterForm = () => {
+    return (
+      recruiterFormData &&
+      recruiterFormData.name.trim() !== "" &&
+      recruiterFormData.companyRole.trim() !== "" &&
+      recruiterFormData.companyName.trim() !== ""
+    );
   };
   return (
     <div className="bg-white ">
@@ -36,7 +50,7 @@ const OnBoard = () => {
             action={handleOnboard}
             setFormData={setRecruiterFormData}
             formData={recruiterFormData}
-
+            isButtonDisabled={!validateRecruiterForm()}
           />
         </TabsContent>
       </Tabs>

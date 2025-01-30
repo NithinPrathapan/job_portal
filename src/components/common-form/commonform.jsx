@@ -8,10 +8,9 @@ const CommonForm = ({
   formControls,
   buttonText,
   isButtonDisabled,
-  btnType,
+  btnType,  
   formData,
   setFormData,
-  
 }) => {
   function handleChange(e, name) {
     setFormData({ ...formData, [name]: e.target.value });
@@ -66,14 +65,20 @@ const CommonForm = ({
           outline-none text-lg drop-shadow-sm transition-all duration-300 ease-in-out
           focus:drop-shadow-md focus:border-blue-500 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
             />
-          </div> 
+          </div>
         );
     }
     return content;
   }
+  const validateForm = () => {
+
+  }
   return (
     <form action={action}>
-      {formControls.map((control) => renderInputByComponentType(control))}
+      {formControls.map((control) => (
+        <div key={control.name}>{renderInputByComponentType(control)}</div>
+      ))}
+
       <div className="mt-6 w-full">
         <Button
           className="disabled:opacity-60 flex h-11 items-center justify-center"
